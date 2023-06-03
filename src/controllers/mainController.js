@@ -63,8 +63,8 @@ module.exports = {
     res.render("productDetail", { producto, imagenes })
   },
 
-  categoryList: async (req, res) => { 
-     const categoriaId = await req.params.categoriaId
+  categoryList: async (req, res) => {     
+    const categoriaId = await req.params.categoriaId
     const productosBuscados = await Productos.findAndCountAll({
       where: {
         categoriaID: categoriaId
@@ -73,17 +73,13 @@ module.exports = {
         {association: 'imagenes'}
       ]      
     })
-    const productos = productosBuscados.rows
-   
-    // REDONDEO NUMERO DE PAGINAS PARA ARRIBA    
+    const productos = productosBuscados.rows     
 
-    res.render('categoryList2', { productos, categoriaId })
+    res.render('categoryList2', { productos, categoriaId})
   },
 
   newProduct: async (req, res) => {
     const categorias = await Categorias.findAll();
-
-
     res.render("newProductForm", { categorias });
   },
 
@@ -107,14 +103,8 @@ module.exports = {
     }
     res.send(productoNuevo);
   },
-
   filterProduct: async (req, res) => {
 
-    //DATOS PARA RENDERIZACION 
-    const limite = 12
-    //BUSCO NUMERO DE PAGINA
-    const pagina = (Number.parseInt(req.params.pagina) - 1)
-    const paginaActual = Number.parseInt(req.params.pagina);
     const categoriaId = await req.params.categoriaId
 
     // SI HAY FILTROS APLICADOS VUELVO A GUARDARLOS, SINO UTILIZO LOS QUE ESTAN EN EL SESSION
@@ -138,16 +128,14 @@ module.exports = {
         },
         include: [
           {association: 'imagenes'}
-        ],
-        limit: limite,
-        offset: pagina != 1? (limite * pagina): 1
+        ]
       })
 
       const productos = productosFiltrados.rows
-      // REDONDEO NUMERO DE PAGINAS PARA ARRIBA
-      const cantidadPaginas = Math.ceil(Number.parseInt(productosFiltrados.count)/12)
+      
+      
 
-      res.render('categoryList2', { productos, cantidadPaginas, categoriaId, paginaActual, filtros})
+      res.render('categoryList2', { productos, categoriaId, filtros})
 
     } else {
       const productosFiltrados = await Productos.findAndCountAll({
@@ -159,16 +147,11 @@ module.exports = {
         },
         include: [
           {association: 'imagenes'}
-        ],
-        limit: limite,
-        offset: pagina != 1? (limite * pagina): 1
+        ]
       }) 
+      const productos = productosFiltrados.rows      
 
-      const productos = productosFiltrados.rows
-      // REDONDEO NUMERO DE PAGINAS PARA ARRIBA
-      const cantidadPaginas = Math.ceil(Number.parseInt(productosFiltrados.count)/12)
-
-      res.render('categoryList2', { productos, cantidadPaginas, categoriaId, paginaActual, filtros })
+      res.render('categoryList2', { productos, categoriaId, filtros })
     }
 
   },

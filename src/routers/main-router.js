@@ -16,8 +16,8 @@ router.get("/newProduct", mainController.newProduct);
 router.post("/newProduct", multerMiddleware.array("fotosDelProducto", 10), mainController.chargeProduct)
 
 //PRODUCT FILTER
-router.get("/filterProduct/:categoriaId/:pagina", mainController.filterProduct);
-router.post("/filterProduct/:categoriaId/:pagina", mainController.filterProduct);
+router.get("/filterProduct/:categoriaId", mainController.filterProduct);
+router.post("/filterProduct/:categoriaId", mainController.filterProduct);
 
 //PRODUCT DETAIL
 router.get("/detail/:id", mainController.productDetail);
