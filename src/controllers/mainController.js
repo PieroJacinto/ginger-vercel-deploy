@@ -31,8 +31,7 @@ module.exports = {
       include: [
         {association: 'imagenes'}
       ]
-    })
-    
+    })    
 
     //TRAER PRODUCTOS(ULTIMOS RESCATES) DE LA BASE DE DATOS
 
@@ -64,31 +63,21 @@ module.exports = {
     res.render("productDetail", { producto, imagenes })
   },
 
-  categoryList: async (req, res) => {
-
-    const limite = 12
-    //DECLARO FILTROS PARA DIFERENCIAR EL PAGINADO DE LOS PRODUCTOS PARA LA VISTA CUANDO HAY Y CUANDO NO HAY FILTROS
-    const filtros = null
-    //BUSCO NUMERO DE PAGINA
-    const pagina = (Number.parseInt(req.params.pagina) - 1)
-    const paginaActual = Number.parseInt(req.params.pagina);
-    const categoriaId = await req.params.categoriaId
+  categoryList: async (req, res) => { 
+     const categoriaId = await req.params.categoriaId
     const productosBuscados = await Productos.findAndCountAll({
       where: {
         categoriaID: categoriaId
       },
       include: [
         {association: 'imagenes'}
-      ],
-       limit: limite,
-       offset: pagina != 1? (limite * pagina): 1
+      ]      
     })
     const productos = productosBuscados.rows
-    console.log(JSON.stringify(productos,null,4));
-    // REDONDEO NUMERO DE PAGINAS PARA ARRIBA
-    const cantidadPaginas = Math.ceil(Number.parseInt(productosBuscados.count)/12)
+   
+    // REDONDEO NUMERO DE PAGINAS PARA ARRIBA    
 
-    res.render('categoryList2', { productos, cantidadPaginas, categoriaId, paginaActual, filtros})
+    res.render('categoryList2', { productos, categoriaId })
   },
 
   newProduct: async (req, res) => {

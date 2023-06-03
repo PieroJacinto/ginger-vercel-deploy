@@ -16,7 +16,7 @@
         <div class="row categ-pad">     
           <!-- Left column with filters large size-->
           <section class="col-12 col-md-2 mt-1rem categ-left-section">   
-            <form class="form-control p-5" action="/filterProduct/<%= categoriaId %>/<%= paginaActual %>" method="POST" enctype="form-data" id="formulario">  
+            <form class="form-control p-5" action="/filterProduct/<%= categoriaId %>" method="POST" enctype="form-data" id="formulario">  
                 <div class="price-input">
                   <div class="field price-mg d-flex">
                     <span>Min</span>
@@ -110,27 +110,7 @@
                     </a>
                 </div>              
              <% } %>
-            <!-- PAGINADO -->
-             <div class="mt-4 mb-4 d-flex justify-content-center">
-              <% if (filtros) { %>
-
-                <% for(let i = 1; i <= cantidadPaginas; i++) { %>
-
-                  <a href="/filterProduct/<%=categoriaId%>/<%= i %>"><button class="page-button" type="submit"> <%= i %> </button></a>
-    
-                  <% } %>
-
-              <% } else { %>
-
-                <% for(let i = 1; i <= cantidadPaginas; i++) { %>
-
-                  <a href="/<%=categoriaId%>/<%= i %>"><button class="page-button" type="submit"> <%= i %> </button></a>
-    
-                  <% } %>
-
-              <% } %>
-
-            </div>
+           
           </div>
           </section>
         </div>

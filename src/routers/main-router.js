@@ -22,5 +22,5 @@ router.post("/filterProduct/:categoriaId/:pagina", mainController.filterProduct)
 //PRODUCT DETAIL
 router.get("/detail/:id", mainController.productDetail);
 
-router.get("/:categoriaId/:pagina", mainController.categoryList); 
+router.get("/:categoriaId", mainController.categoryList); 
 
