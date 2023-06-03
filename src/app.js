@@ -38,10 +38,10 @@ app.use(session({
 
 
 //REQUERIMOS EL ROUTEADOR PRINCIPAL
-// const mainRouter = require("./routers/main-router");
+const mainRouter = require("./routers/main-router");
 
-// MONTAMOS MAIN ROUTER
-// app.use(mainRouter);
+//MONTAMOS MAIN ROUTER
+app.use(mainRouter);
 
 //EXPORTAMOS APP
 module.exports = app
