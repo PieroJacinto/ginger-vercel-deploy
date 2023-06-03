@@ -14,6 +14,7 @@ const config = {
       host: process.env.DB_HOST,
       dialect: "mysql",
       dialectModule: require('mysql2'),
+      port:3306
 } 
 const db = {};
 
