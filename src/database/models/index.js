@@ -13,13 +13,12 @@ const config = {
       database: process.env.DB_NAME,
       host: process.env.DB_HOST,
       dialect: "mysql",
-      dialectModule: require('mysql2'),
-      port:3306
+      dialectModule: require('mysql2'),      
 } 
 const db = {};
 
 let sequelize;
-  sequelize = new Sequelize(config.database, config.username, config.password, config);
+  sequelize = new Sequelize(config.database, config.username, config.password,  config);
 
 fs
   .readdirSync(__dirname)
